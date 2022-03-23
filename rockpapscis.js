@@ -14,15 +14,12 @@ function computerPlay () {
     }
 }
 
-function playerPlay () {
-    let result = prompt('Choose "rock", "paper", or "scissors"!')
-    return result;
+function playerPlay (choice) {
+    return `${choice}`;
 }
 
 function round (computerSelection, playerSelection) {
-    
-    playerSelection = playerSelection.toLowerCase();
-    
+
     if (
         (computerSelection === 'rock' && playerSelection === 'rock') ||
         (computerSelection === 'paper' && playerSelection === 'paper') ||
@@ -66,12 +63,25 @@ function game (numOfRounds) {
     )
 }
 
-game(3);
+//DOM-Event Manipulation 
 
-// console.log(round(computerPlay(), 'paper'));
-// console.log(round(computerPlay(), 'rock'));
-// console.log(round(computerPlay(), 'scissors'));
-// console.log(round(computerPlay(), 'Rock'));
-// console.log(round(computerPlay(), 'paPer'));
-// console.log(round(computerPlay(), 'SCISSORS'));
-// console.log(round(computerPlay(), 'hi'));
+//Associates buttons on webpage with corresponding labels
+const rock = document.querySelector(".rock-button");
+const paper = document.querySelector(".paper-button");
+const scissors = document.querySelector(".scissors-button");
+
+//when buttons are clicked, players move is stored
+rock.addEventListener('click', (e) => {
+    console.log(playerPlay(e.target));
+    
+});
+paper.addEventListener('click', (e) => {
+    console.log(playerPlay(e.target));
+
+});
+scissors.addEventListener('click', (e) => {
+    console.log(playerPlay(e.target));
+
+});
+
+game(3)

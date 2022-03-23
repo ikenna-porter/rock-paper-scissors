@@ -1,0 +1,35 @@
+body {
+    display: flex;
+    flex-direction: column;;
+    align-items: center;
+}
+
+.title h1 {
+    text-align: center;
+    font-weight: bolder;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.round-history {
+    display: flex;
+    justify-content: space-between;
+    width: 750px;
+    height: 500px;
+}
+.player-round-history {
+    width: 370px;
+    background-color: rgba(216, 215, 215, 0.988);
+    border-radius: 5px;
+}
+
+.computer-round-history {
+    width: 370px;
+    background-color: rgba(216, 215, 215, 0.988);
+    border-radius: 5px;
+}

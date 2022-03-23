@@ -5,9 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>You versus the Machine</title>
+    <link rel="stylesheet" href="rockpapscis.css"></link>
     <script src="./rockpapscis.js" defer></script>
 </head>
 <body>
-    
+    <div class="title">
+        <h1>Choose Your Weapon!</h1>
+    </div>
+    <div class="buttons-container">
+        <div class="rock-button">
+            <input type="image" src="./img/rock.png">
+        </div>
+        <div class="paper-button">
+            <input type="image" src="./img/paper.png">
+        </div>
+        <div class="scissors-button">
+            <input type="image" src="./img/scissors.png">
+        </div>
+    </div>
+    <div class="score">
+        <p>
+            Score:
+        </p>
+        <p class="score-results">
+            Dummy Score
+        </p>
+    </div>
+    <div class="round-history">
+        <div class="player-round-history"></div>
+        <div class="computer-round-history"></div>
+    </div>
 </body>
 </html>
