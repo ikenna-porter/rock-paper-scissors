@@ -1,3 +1,16 @@
+//DOM-Event Manipulation 
+
+//Associates buttons on webpage with corresponding labels
+const buttons = document.querySelector(".button");
+
+const playerHistory = document.querySelector(".player-round-history")
+const computerHistory = document.querySelector(".computer-round-history")
+
+//when button is clicked, players move is stored and a round of RPS is played
+buttons.addEventListener('click', (e) => {
+    round(computerPlay(),playerPlay(e.target.id)) 
+});
+
 
 function computerPlay () {
     let randomNum = Math.floor(Math.random() * 3 + 1);
@@ -15,7 +28,7 @@ function computerPlay () {
 }
 
 function playerPlay (choice) {
-    return `${choice}`;
+    return `${choice}`
 }
 
 function round (computerSelection, playerSelection) {
@@ -31,6 +44,10 @@ function round (computerSelection, playerSelection) {
     (computerSelection === 'paper' && playerSelection === 'scissors') ||
     (computerSelection === 'scissors' && playerSelection === 'rock')) {
         console.log(`Congratulations, ${playerSelection} beats ${computerSelection}!`);
+        let playerDiv = document.createElement('div');
+        playerDiv.classList.add('playerResults')
+        playerDiv.innerText = `Congratulations, ${playerSelection} beats ${computerSelection}!`;
+        playerHistory.appendChild(playerDiv); 
         return 1
     } else {
         console.log(`You lose...${computerSelection} beats ${playerSelection}.`)
@@ -62,26 +79,3 @@ function game (numOfRounds) {
         console.log('Uh oh! You lost the game. 🤕')
     )
 }
-
-//DOM-Event Manipulation 
-
-//Associates buttons on webpage with corresponding labels
-const rock = document.querySelector(".rock-button");
-const paper = document.querySelector(".paper-button");
-const scissors = document.querySelector(".scissors-button");
-
-//when buttons are clicked, players move is stored
-rock.addEventListener('click', (e) => {
-    console.log(playerPlay(e.target));
-    
-});
-paper.addEventListener('click', (e) => {
-    console.log(playerPlay(e.target));
-
-});
-scissors.addEventListener('click', (e) => {
-    console.log(playerPlay(e.target));
-
-});
-
-game(3)
