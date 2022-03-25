@@ -1,5 +1,5 @@
 //Associates buttons on webpage with corresponding labels
-const buttons = document.querySelector(".button");
+const buttons = document.querySelector(".buttons-container");
 
 const playerHistory = document.querySelector(".player-round-history") //player wins/losses are stored here
 const computerHistory = document.querySelector(".computer-round-history") //pc wins/losses are stored here
@@ -35,6 +35,7 @@ let computerScore = 0;
             prompt('You win!')
         } else if (computerScore >= 5) {
             audioDefeated.play();
+            buttons.classList.toggle('button-animation')
             prompt('You lose.')
         }
         
@@ -98,29 +99,4 @@ function round (computerSelection, playerSelection) {
         computerOutput(win);
         return -1
     }
-}
-
-function game (numOfRounds) {
-
-    let playerWins = 0;
-    let computerWins = 0;
-    let result;
-
-    for (let i = 0; i < numOfRounds; i++) {
-        result = round(computerPlay(),playerPlay())
-
-        if (result === 1) {
-            playerWins++
-        } else if (result === -1) {
-            computerWins++
-        }
-    }
-
-    if (playerWins > computerWins) {
-        console.log('Congrats! You win the game! 🥰')
-    } else if (playerWins === computerWins) {
-        console.log('It\'s a tie. No one wins! 🤌🏾')
-    } else (
-        console.log('Uh oh! You lost the game. 🤕')
-    )
 }

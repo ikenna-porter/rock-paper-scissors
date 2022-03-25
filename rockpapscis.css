@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'video-game';
-    src: url(./font/VT323-Regular.ttf);
+    src: url('./font/VT323-Regular.ttf');
 }
 
 @font-face {
@@ -25,6 +25,10 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+}
+
+.button-animation {
+    animation: shake 0.5s;
 }
 
 .score-results {
