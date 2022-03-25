@@ -4,6 +4,14 @@ const buttons = document.querySelector(".button");
 const playerHistory = document.querySelector(".player-round-history") //player wins/losses are stored here
 const computerHistory = document.querySelector(".computer-round-history") //pc wins/losses are stored here
 
+//Audio files
+const audioDefeated = document.querySelector(".audio-defeated");
+const audioExcellent = document.querySelector(".audio-excellent");
+const audioFailure = document.querySelector(".audio-failure");
+const audioGo = document.querySelector(".audio-go");
+const audioVictory = document.querySelector(".audio-victory");
+
+
 const score = document.querySelector(".score-results")
 let playerScore = 0;
 let computerScore = 0;
@@ -23,8 +31,10 @@ let computerScore = 0;
     
         //Declares the winner
         if (playerScore >= 5) {
+            audioVictory.play();
             prompt('You win!')
         } else if (computerScore >= 5) {
+            audioDefeated.play();
             prompt('You lose.')
         }
         
