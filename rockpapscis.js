@@ -3,18 +3,15 @@ const buttons = document.querySelector(".buttons-container");
 const indivButtons = document.querySelectorAll('.button');
 
 const playerHistory = document.querySelector(".player-round-history") //player wins/losses are stored here
-const computerHistory = document.querySelector(".computer-round-history") //pc wins/losses are stored here
 
 //Game over modal pop-up
+const modalBackground = document.querySelector(".overlay");
 const gameOverModal = document.querySelector(".modal");
 const gameOverModalH2 = document.querySelector(".modal div h2");
 const gameOverModalP = document.querySelector(".modal-score");
 
 //Audio files
 const audioDefeated = document.querySelector(".audio-defeated");
-const audioExcellent = document.querySelector(".audio-excellent");
-const audioFailure = document.querySelector(".audio-failure");
-const audioGo = document.querySelector(".audio-go");
 const audioVictory = document.querySelector(".audio-victory");
 
 
@@ -22,45 +19,46 @@ const score = document.querySelector(".score-results")
 let playerScore = 0;
 let computerScore = 0;
 
-    //when button is clicked, players move is stored and a round of RPS is played
-    buttons.addEventListener('click', (e) => {
-        let result = round(computerPlay(),playerPlay(e.target.id));
-        
-        //checks output of round() => if positive, player wins / if negative, computer wins
-        if (result > 0) {
-            e.target.classList.add('button-animation-win');
-            setTimeout(function() { //toggles off class for button animation for losing so animation can be played again in future
-                e.target.classList.remove('button-animation-win');
-            }, 1000)
-            playerScore++; //increase player score by 1 for winning round
+//when button is clicked, players move is stored and a round of RPS is played
+buttons.addEventListener('click', (e) => {
+    let result = round(computerPlay(), playerPlay(e.target.id));
 
-        } else if (result < 0) {
+    //checks output of round() => if positive, player wins / if negative, computer wins
+    if (result > 0) {
+        e.target.classList.add('button-animation-win');
+        setTimeout(function () { //toggles off class for button animation for losing so animation can be played again in future
+            e.target.classList.remove('button-animation-win');
+        }, 1000)
+        playerScore++; //increase player score by 1 for winning round
 
-            e.target.classList.add('button-animation-lose'); //plays button animation for losing
-            setTimeout(function() { //toggles off class for button animation for losing so animation can be played again in future
-                e.target.classList.remove('button-animation-lose');
-            }, 1000)
+    } else if (result < 0) {
 
-            computerScore++; //increase computer score by 1 for winning round
-        }
-        
-        //Updates scoreboard
-        score.innerText = `${playerScore} - ${computerScore}`
-    
-        //Declares the winner
-        if (playerScore >= 5) {
-            audioVictory.play();
-            modal(playerScore, computerScore);
-        } else if (computerScore >= 5) {
-            audioDefeated.play();
-            modal(playerScore, computerScore);
-        }
-        
-    });
+        e.target.classList.add('button-animation-lose'); //plays button animation for losing
+        setTimeout(function () { //toggles off class for button animation for losing so animation can be played again in future
+            e.target.classList.remove('button-animation-lose');
+        }, 1000)
+
+        computerScore++; //increase computer score by 1 for winning round
+    }
+
+    //Updates scoreboard
+    score.innerText = `${playerScore} - ${computerScore}`
+
+    //Declares the winner
+    if (playerScore >= 5) {
+        audioVictory.play();
+        modal(playerScore, computerScore);
+    } else if (computerScore >= 5) {
+        audioDefeated.play();
+        modal(playerScore, computerScore);
+    }
+
+});
 
 
-function modal (player, computer) {
+function modal(player, computer) {
     gameOverModal.classList.replace('modal-off', 'modal-on');
+    modalBackground.style.display = "flex";
     if (player > computer) {
         gameOverModalH2.innerText = 'VICTORY!'
         gameOverModalP.innerText = `${player} - ${computer}`;
@@ -72,7 +70,7 @@ function modal (player, computer) {
 }
 
 //function used to randomly determine computer's move.
-function computerPlay () {
+function computerPlay() {
     //Generates a random number
     let randomNum = Math.floor(Math.random() * 3 + 1);
 
@@ -83,48 +81,39 @@ function computerPlay () {
 }
 
 //takes an input and returns it as a string. Function represents player's move
-function playerPlay (choice) {
+function playerPlay(choice) {
     return `${choice}`
 }
 
 //function that creates text that will go in player's history
-function playerOutput (result) {
+function playerOutput(result) {
     let newDiv = document.createElement('div');
     newDiv.classList.add('playerResults')
     newDiv.innerText = result;
     playerHistory.appendChild(newDiv);
 }
 
-//creates text that will go in computer's playing history
-function computerOutput (result) {
-    let newDiv = document.createElement('div');
-    newDiv.classList.add('computerResults')
-    newDiv.innerText = result;
-    computerHistory.appendChild(newDiv);
-}
-
-function round (computerSelection, playerSelection) {
+function round(computerSelection, playerSelection) {
     let tie = "It's a tie.";
-    let win = `Congratulations, ${playerSelection} beats ${computerSelection}!`; 
+    let win = `Congratulations, ${playerSelection} beats ${computerSelection}!`;
     let lose = `You lose...${computerSelection} beats ${playerSelection}.`;
 
     if (
         (computerSelection === 'rock' && playerSelection === 'rock') ||
         (computerSelection === 'paper' && playerSelection === 'paper') ||
         (computerSelection === 'scissors' && playerSelection === 'scissors')) {
-            playerOutput(tie);
-            computerOutput(tie);
-            return 0;
+        playerOutput(tie);
+        return 0;
+
     } else if (
-    (computerSelection === 'rock' && playerSelection === 'paper') ||
-    (computerSelection === 'paper' && playerSelection === 'scissors') ||
-    (computerSelection === 'scissors' && playerSelection === 'rock')) {
+        (computerSelection === 'rock' && playerSelection === 'paper') ||
+        (computerSelection === 'paper' && playerSelection === 'scissors') ||
+        (computerSelection === 'scissors' && playerSelection === 'rock')) {
         playerOutput(win);
-        computerOutput(lose);
         return 1
+
     } else {
         playerOutput(lose);
-        computerOutput(win);
         return -1
     }
 }
